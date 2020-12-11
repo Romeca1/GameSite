@@ -9,7 +9,12 @@ class Game extends Model
 {
     public $timestamps = false;
     protected $fillable = [
+    	'id',
         'name',
         'icon',
+        'link',
+        'category',
+        'description',
+        'instruction',
     ];
 }

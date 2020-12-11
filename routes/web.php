@@ -18,3 +18,8 @@ Route::resource('game', 'GameController');
 Route::get('/admin',[AdminController::class,'AdminPage']);
 Route::get('/admin/users',[AdminController::class,'UsersPage']);
 Route::get('/admin/games',[AdminController::class,'GamesPage']);
+Route::get('/admin/games/delete/{$id}',function($id)
+{
+	return view('GameInclude.GameDeleatForm.',['id' => $id]);
+});
+Route::post('/admin/rss',[AdminController::class,'RssConection']);

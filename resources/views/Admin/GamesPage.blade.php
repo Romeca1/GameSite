@@ -3,6 +3,7 @@
 <head>
 	<title>Games</title>
 </head>
+
 <style>
 	body{
 			padding: 0;
@@ -10,7 +11,7 @@
 			background-color: #474848;
 		}
 		.table-div{
-			margin-left: 12%;
+			margin-left: 4%;
 			margin-top: 15%;
 		}
 		table,tr,td{
@@ -34,7 +35,6 @@
 		a{
 			padding: 25px 35px;
 			margin-top: 5px;
-			border-bottom-right-radius: 25px;
 			text-decoration: none;
 			background-color: #333;
 			color:white;
@@ -50,9 +50,21 @@
 			padding: 0;
 			margin: 0;
 		}
+		.btn-del{
+			padding: 0;
+			margin: 0;
+		}
+		.deleat-btn{
+			padding: 20px 25px;
+			background-color: red;
+		}
 		img{
 			width: 25px;
 			height: 20px;
+		}
+		.del-img{
+			width: 25px;
+			height: 20px;	
 		}
 		.update-btn{
 			padding: 20px 25px;
@@ -79,10 +91,12 @@
 					<td>{{$game->link}}</td>
 					<td><span>#</span>{{$game->category}}</td>
 					<td class="btn"><a href="" class="update-btn"><img src="{{asset('../img/hiclipart.com.png')}}"></a></td>
+					<td class="btn-del"><a href="/game/{{$game->id}}" class="deleat-btn"><img class="del-img" src="{{asset('../img/del.png')}}"></a></td>
 					<?php $count++;?>
 				</tr>
 			@endforeach
 		</table>
+		
 	</div>
 </body>
 </html>

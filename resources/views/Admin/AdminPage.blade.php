@@ -28,7 +28,7 @@
 		}
 		input{
 			background-color: #581845;
-			
+			color:white;
 			width: 245px;
 		}
 		.create-btn{
@@ -107,6 +107,12 @@
 			color:white;
 			font-size: 20px;
 		}
+		.rss-div{
+			margin-left: 50%;
+			margin-top: 20%;
+			margin-bottom: 15%;
+			
+		}
 	</style>
 </head>
 <body>
@@ -170,27 +176,36 @@
 		<div class="text-div">
 			<p>Top 5 likes game!</p>
 		</div>
-		@for($i=1;$i<=5;$i++)
-			@foreach(App\Models\Game::all() as $game)
-            <div class="single-game-div">
-                <img class="game-icon" src="{{$game->icon}}">
-                <p>{{$game->name}}</p>
-            </div>
-        	@endforeach
-        @endfor
+		@foreach(App\Models\Game::all() as $game)
+        <div class="single-game-div">
+            <img class="game-icon" src="{{$game->icon}}">
+            <p>{{strtolower($game->name)}}</p>
+        </div>
+    	@endforeach
 	</div>
 	<div class="div2">
 		<div class="text-div">
 			<p>Top 5 likes game!</p>
 		</div>
-		@for($i=1;$i<=5;$i++)
 		@foreach(App\Models\Game::all() as $game)
-            <div class="single-game-div">
-                <img class="game-icon" src="{{$game->icon}}">
-                <p>{{$game->name}}</p>
-            </div>
-        @endforeach
-        @endfor
+	        <div class="single-game-div">
+	            <img class="game-icon" src="{{$game->icon}}">
+	            <p>{{strtolower($game->name)}}</p>
+	        </div>
+	    @endforeach
+	</div>
+	<div class="rss-div">
+		<form method="POST" action="/admin/rss">
+			 @csrf
+			<div>
+				<label for="name">Paste the link of the site</label><br>
+				<input type="text" name="link">
+			</div>
+			<br>
+			<div>
+				<input type="submit" value="Connect">
+			</div>
+		</form>
 	</div>
 </body>
 </html>

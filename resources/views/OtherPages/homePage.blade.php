@@ -54,7 +54,7 @@
 				<li>
 				<form method="get" action="/game/{{$game->id}}">
 					<img src="{{$game->icon}}">
-					<div><span>{{$game->name}}</span></div>
+					<div><span>{{strtolower($game->name)}}</span></div>
 					<input type="submit" name="sbm" value="play">
 				</form>
 			</li>
