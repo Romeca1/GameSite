@@ -13,6 +13,8 @@
         <style>
         	body{
         		background-color: #283747;
+                padding: 0;
+                margin: 0;
         	}
             img{
             	width:120px;
@@ -42,20 +44,62 @@
             	border-radius: 10px;
             	margin:5px;
             }
+            .menu{
+                overflow: hidden;
+                padding: 0;
+                margin:0px;
+                list-style-type: none;
+                background-color: #43EC28;
+            }
+            .menu li{
+                float:left;
+                border:none;
+                margin: 0px;
+            }
+            .menu li a{
+                border:none;
+                padding: 15px 25px;
+                background-color: #43EC28;
+                margin: 0px;
+                color:black;
+                text-decoration: none;   
+            }
+            .menu li a:hover{
+                background-color: #13790B;
+            }
+            .head{
+                margin-left: 45%;
+            }
+            h1{
+                color:white;
+            }
         </style>
 
-       
     </head>
+    <form method="GET" action='/game'>
+        {{ csrf_field() }}
+        <ul class="menu">   
+            <li><input type="submit" name="btn" value="All"></li>
+            <li><input type="submit" name="btn" value="Puzzle"></li>
+            <li><input type="submit" name="btn" value="2 Player"></li>
+            <li><input type="submit" name="btn" value="Sports"></li>
+            <li><input type="submit" name="btn" value="Action"></li>
+            <li><input type="submit" name="btn" value="Arcade"></li>
+            <li><input type="submit" name="btn" value="Adventure"></li>
+            <li><input type="submit" name="btn" value="Racing"></li>
+        </ul>
+    </form>
     <body class="antialiased">
-    	
+        <div class="head"><h1>{{$title ?? ''}}</h1></div>
+    	<?php  $count = 1;?>
     	<div class="main-div">
     	<ul>
 			@foreach($games as $game)
 				<li>
 				<form method="get" action="/game/{{$game->id}}">
 					<img src="{{$game->icon}}">
-					<div><span>{{strtolower($game->name)}}</span></div>
-					<input type="submit" name="sbm" value="play">
+                    <br>
+                    <input type="submit" name="sbm" value="play">
 				</form>
 			</li>
 			@endforeach

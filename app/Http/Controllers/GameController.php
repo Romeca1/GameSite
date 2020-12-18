@@ -12,9 +12,19 @@ class GameController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view();
+
+        $games = [];
+        $title = '';
+        if($request['btn'] == 'All'){
+            $games = Game::all();
+            $title = 'All';
+        }else{
+            $games = Game::where('category',$request['btn'])->get();
+            $title = $request['btn'];
+        }
+        return view('OtherPages.homePage',['games' => $games,'title' => $title]);
     }
 
     /**

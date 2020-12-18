@@ -176,7 +176,7 @@
 		<div class="text-div">
 			<p>Top 5 likes game!</p>
 		</div>
-		@foreach(App\Models\Game::all() as $game)
+		@foreach($topLikes as $game)
         <div class="single-game-div">
             <img class="game-icon" src="{{$game->icon}}">
             <p>{{strtolower($game->name)}}</p>
@@ -187,7 +187,7 @@
 		<div class="text-div">
 			<p>Top 5 likes game!</p>
 		</div>
-		@foreach(App\Models\Game::all() as $game)
+		@foreach($topDislikes as $game)
 	        <div class="single-game-div">
 	            <img class="game-icon" src="{{$game->icon}}">
 	            <p>{{strtolower($game->name)}}</p>

@@ -12,14 +12,21 @@ class AdminController extends Controller
     public function AdminPage()
     {
     	$MostLikesGames = DB::table('games')
-                            ->select('icon')
+                            ->select('*')
                             ->orderBy('likes', 'DESC')
                             ->limit(5)
                             ->get();
+        $MostDislikesGames = DB::table('games')
+                            ->select('*')
+                            ->orderBy('dislikes', 'DESC')
+                            ->limit(5)
+                            ->get();
+        
         return view('Admin.AdminPage', [
             "user_count" => count(User::all()),
     	   "game_count" => count(Game::all()),
-    	   "topLikes" => $MostLikesGames
+    	   "topLikes" => $MostLikesGames,
+           'topDislikes' => $MostDislikesGames
         ]);
     }
     public function UsersPage()
@@ -33,19 +40,18 @@ class AdminController extends Controller
     #description instruction title url assetList => name categoryList => name
     public function RssConection(Request $request)
     {
-
         $games = file_get_contents($request['link']);
         $json_a = json_decode($games, true);
-        
-        for ($i=1; $i <count($json_a) ; $i++) { 
-            Game::create([
-                "name" => $json_a[$i]['title'],
-                "link" => $json_a[$i]['url'],
-                "icon" => $json_a[$i]['assetList'][0]['name'],
-                "category" => $json_a[$i]['categoryList'][0]['name'],
-                "description" => $json_a[$i]['description'],
-                "instruction" => $json_a[$i]['instructions']
-            ]);
-        }
+        $array = [];
+        for ($j=0; $j <count($json_a) ; $j++) { 
+            $array[$j]['name'] = $json_a[$j]['title'];
+            $array[$j]['link'] = $json_a[$j]['url'];
+            $array[$j]['icon'] = $json_a[$j]['assetList'][0]['name'];
+            $array[$j]['category'] = $json_a[$j]['categoryList'][0]['name'];
+            $array[$j]['description'] = $json_a[$j]['description'];
+            $array[$j]['instruction'] = $json_a[$j]['instructions'];          
+        }   
+        DB::table('games')->insert($array);
+        return redirect('/admin');
     }
 }
